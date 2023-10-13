@@ -7,12 +7,228 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/input"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="end"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toTopOf="@id/output"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="end"
+        android:text="@string/result_default"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/line"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/grey"
+        app:layout_constraintBottom_toTopOf="@id/keyboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TableLayout
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Row1 -->
+        <TableRow
+            android:layout_weight="1"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/clear"
+                style="@style/BtnOrange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/clear" />
+
+            <TextView
+                android:id="@+id/delete"
+                style="@style/BtnOrange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/delete" />
+
+            <TextView
+                android:id="@+id/modulo"
+                style="@style/BtnOrange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/modulo" />
+
+            <TextView
+                android:id="@+id/division"
+                style="@style/BtnOrange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/division" />
+        </TableRow>
+
+        <!-- Row2 -->
+        <TableRow
+            android:layout_weight="1"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/seven"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/seven" />
+
+            <TextView
+                android:id="@+id/eight"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/eight" />
+
+            <TextView
+                android:id="@+id/nine"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/nine" />
+
+            <TextView
+                android:id="@+id/multiplication"
+                style="@style/BtnOrange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/multiplication" />
+        </TableRow>
+
+        <!-- Row3 -->
+        <TableRow
+            android:layout_weight="1"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/four"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/four" />
+
+            <TextView
+                android:id="@+id/five"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/five" />
+
+            <TextView
+                android:id="@+id/six"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/six" />
+
+            <TextView
+                android:id="@+id/subtraction"
+                style="@style/BtnOrange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/subtraction" />
+        </TableRow>
+
+        <!-- Row4 -->
+        <TableRow
+            android:layout_weight="1"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/one"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/one" />
+
+            <TextView
+                android:id="@+id/two"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/two" />
+
+            <TextView
+                android:id="@+id/three"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/three" />
+
+            <TextView
+                android:id="@+id/addition"
+                style="@style/BtnOrange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/addition" />
+        </TableRow>
+
+        <!-- Row5 -->
+        <TableRow
+            android:layout_weight="1"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/dot"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/dot" />
+
+            <TextView
+                android:id="@+id/zero"
+                style="@style/BtnBlack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/zero" />
+
+            <TextView
+                android:id="@+id/equals"
+                style="@style/BtnWhite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/equals" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
