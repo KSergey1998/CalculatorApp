@@ -27,4 +27,36 @@ public class Presenter implements Contract.Presenter {
     public String count(String inputFieldContent) {
         return model.count(inputFieldContent);
     }
+
+    @Override
+    public String verify(String inputFieldContent, String btnName) {
+        if (inputFieldContent.isEmpty()) {
+            if (Character.isDigit(btnName.charAt(0))) {
+                return btnName;
+            } else {
+                if (btnName.equals("-")) {
+                    return btnName;
+                }
+                if (btnName.equals("0")) {
+                    return "";
+                }
+                if (btnName.equals(".")) {
+                    return "0.";
+                } else {
+                    return "";
+                }
+            }
+        } else {
+            if (Character.isDigit(btnName.charAt(0))) {
+                return inputFieldContent.concat(btnName);
+            } else {
+                char lastSymbol = inputFieldContent.charAt(inputFieldContent.length() - 1);
+                if (Character.isDigit(lastSymbol)) {
+                    return inputFieldContent.concat(btnName);
+                } else {
+                    return "";
+                }
+            }
+        }
+    }
 }

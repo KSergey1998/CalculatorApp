@@ -3,6 +3,7 @@ package com.example.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements Contract.View {
@@ -57,8 +58,9 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
                         inputField.setText(presenter.count(inputFieldContent));
                         break;
                     default:
-                        inputFieldContent += btnName;
-                        inputField.setText(inputFieldContent);
+                        String verifiedInputFieldContent = presenter.verify(
+                                inputFieldContent, btnName);
+                        inputField.setText(verifiedInputFieldContent);
                         outputField.setText(presenter.delete(inputFieldContent));
                 }
             });

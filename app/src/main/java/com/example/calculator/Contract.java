@@ -15,5 +15,7 @@ public interface Contract {
         String delete(String inputFieldContent);
 
         String count(String inputFieldContent);
+
+        String verify(String inputFieldContent, String btnName);
     }
 }
