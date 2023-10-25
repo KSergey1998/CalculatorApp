@@ -2,20 +2,30 @@ package com.example.calculator;
 
 public interface Contract {
     interface Model {
-        String count(String inputFieldContent);
+        String verify(String btn, String inputField);
+
+        String clear();
+
+        String delete(String inputField);
+
+        String modulo(String inputField);
+
+        String count(String inputField);
     }
 
     interface View {
+        void setInputField(String inputField);
 
+        void setOutputField(String outputField);
     }
 
     interface Presenter {
-        String clear();
+        void onBtnClick(String btn, String inputField);
 
-        String delete(String inputFieldContent);
+        void onClearBtnClick();
 
-        String count(String inputFieldContent);
+        void onDeleteBtnClick(String inputField);
 
-        String verify(String inputFieldContent, String btnName);
+        void onModuloBtnClick(String inputField);
     }
 }

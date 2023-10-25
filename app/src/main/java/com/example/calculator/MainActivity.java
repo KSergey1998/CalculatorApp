@@ -3,7 +3,6 @@ package com.example.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements Contract.View {
@@ -42,26 +41,35 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
                 btnThree, btnAddition, btnDot, btnZero, btnEquals);
     }
 
+    @Override
+    public void setInputField(String inputField) {
+        this.inputField.setText(inputField);
+    }
+
+    @Override
+    public void setOutputField(String outputField) {
+        this.outputField.setText(outputField);
+    }
+
     private void onBtnClick(TextView... textViews) {
         for (TextView btn : textViews) {
             btn.setOnClickListener(view -> {
                 String inputFieldContent = (String) inputField.getText();
                 String btnName = (String) btn.getText();
+
                 switch (btnName) {
                     case "AC":
-                        inputField.setText(presenter.clear());
+                        presenter.onClearBtnClick();
                         break;
                     case "X":
-                        inputField.setText(presenter.delete(inputFieldContent));
+                        presenter.onDeleteBtnClick(inputFieldContent);
+                        break;
+                    case "%":
                         break;
                     case "=":
-                        inputField.setText(presenter.count(inputFieldContent));
                         break;
                     default:
-                        String verifiedInputFieldContent = presenter.verify(
-                                inputFieldContent, btnName);
-                        inputField.setText(verifiedInputFieldContent);
-                        outputField.setText(presenter.delete(inputFieldContent));
+                        presenter.onBtnClick(btnName, inputFieldContent);
                 }
             });
         }

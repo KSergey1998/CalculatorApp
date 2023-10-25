@@ -10,53 +10,22 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
-    public String clear() {
-        return "";
+    public void onBtnClick(String btn, String inputField) {
+        view.setInputField(model.verify(btn, inputField));
     }
 
     @Override
-    public String delete(String inputFieldContent) {
-        if (inputFieldContent.isEmpty()) {
-            return inputFieldContent;
-        } else {
-            return inputFieldContent.substring(0, inputFieldContent.length() - 1);
-        }
+    public void onClearBtnClick() {
+        view.setInputField(model.clear());
     }
 
     @Override
-    public String count(String inputFieldContent) {
-        return model.count(inputFieldContent);
+    public void onDeleteBtnClick(String inputField) {
+        view.setInputField(model.delete(inputField));
     }
 
     @Override
-    public String verify(String inputFieldContent, String btnName) {
-        if (inputFieldContent.isEmpty()) {
-            if (Character.isDigit(btnName.charAt(0))) {
-                return btnName;
-            } else {
-                if (btnName.equals("-")) {
-                    return btnName;
-                }
-                if (btnName.equals("0")) {
-                    return "";
-                }
-                if (btnName.equals(".")) {
-                    return "0.";
-                } else {
-                    return "";
-                }
-            }
-        } else {
-            if (Character.isDigit(btnName.charAt(0))) {
-                return inputFieldContent.concat(btnName);
-            } else {
-                char lastSymbol = inputFieldContent.charAt(inputFieldContent.length() - 1);
-                if (Character.isDigit(lastSymbol)) {
-                    return inputFieldContent.concat(btnName);
-                } else {
-                    return "";
-                }
-            }
-        }
+    public void onModuloBtnClick(String inputField) {
+
     }
 }
