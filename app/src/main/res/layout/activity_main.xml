@@ -7,24 +7,26 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/input"
+        android:id="@+id/expression"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
         android:gravity="end"
         android:textSize="55sp"
-        app:layout_constraintBottom_toTopOf="@id/output"
+        app:layout_constraintBottom_toTopOf="@id/result"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/output"
+        android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
         android:gravity="end"
+        android:hint="@string/zero"
         android:text="@string/result_default"
+        android:textColorHint="@color/black"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/line"
         app:layout_constraintEnd_toEndOf="parent" />

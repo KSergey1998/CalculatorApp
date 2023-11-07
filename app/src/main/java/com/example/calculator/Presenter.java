@@ -10,22 +10,34 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
-    public void onBtnClick(String btn, String inputField) {
-        view.setInputField(model.verify(btn, inputField));
+    public void onBtnClick(String btn, String expression) {
+        expression = model.verify(btn, expression);
+        view.setExpressionField(expression);
+        view.setResultField(model.count(expression));
     }
 
     @Override
     public void onClearBtnClick() {
-        view.setInputField(model.clear());
+        view.setExpressionField(model.clear());
+        view.setResultField("");
     }
 
     @Override
-    public void onDeleteBtnClick(String inputField) {
-        view.setInputField(model.delete(inputField));
+    public void onDeleteBtnClick(String expression) {
+        expression = model.delete(expression);
+        view.setExpressionField(expression);
+        view.setResultField(model.count(expression));
     }
 
     @Override
-    public void onModuloBtnClick(String inputField) {
+    public void onModuloBtnClick(String expression) {
+        expression = model.modulo(expression);
+        view.setExpressionField(expression);
+        view.setResultField(model.count(expression));
+    }
 
+    @Override
+    public void onEqualsBtnClick(String expression) {
+        view.setExpressionField(model.count(expression));
     }
 }

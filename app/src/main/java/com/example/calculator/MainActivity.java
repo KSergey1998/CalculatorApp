@@ -6,16 +6,16 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements Contract.View {
-    private TextView inputField;
-    private TextView outputField;
+    private TextView expressionField;
+    private TextView resultField;
     private Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        inputField = findViewById(R.id.input);
-        outputField = findViewById(R.id.output);
+        expressionField = findViewById(R.id.expression);
+        resultField = findViewById(R.id.result);
         TextView btnClear = findViewById(R.id.clear);
         TextView btnDelete = findViewById(R.id.delete);
         TextView btnModulo = findViewById(R.id.modulo);
@@ -42,34 +42,36 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
     }
 
     @Override
-    public void setInputField(String inputField) {
-        this.inputField.setText(inputField);
+    public void setExpressionField(String expressionField) {
+        this.expressionField.setText(expressionField);
     }
 
     @Override
-    public void setOutputField(String outputField) {
-        this.outputField.setText(outputField);
+    public void setResultField(String resultField) {
+        this.resultField.setText(resultField);
     }
 
     private void onBtnClick(TextView... textViews) {
-        for (TextView btn : textViews) {
-            btn.setOnClickListener(view -> {
-                String inputFieldContent = (String) inputField.getText();
-                String btnName = (String) btn.getText();
+        for (TextView textView : textViews) {
+            textView.setOnClickListener(view -> {
+                String expressionFieldContent = (String) expressionField.getText();
+                String btn = (String) textView.getText();
 
-                switch (btnName) {
+                switch (btn) {
                     case "AC":
                         presenter.onClearBtnClick();
                         break;
                     case "X":
-                        presenter.onDeleteBtnClick(inputFieldContent);
+                        presenter.onDeleteBtnClick(expressionFieldContent);
                         break;
                     case "%":
+                        presenter.onModuloBtnClick(expressionFieldContent);
                         break;
                     case "=":
+                        presenter.onEqualsBtnClick(expressionFieldContent);
                         break;
                     default:
-                        presenter.onBtnClick(btnName, inputFieldContent);
+                        presenter.onBtnClick(btn, expressionFieldContent);
                 }
             });
         }

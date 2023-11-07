@@ -1,47 +1,48 @@
 package com.example.calculator;
 
+import com.example.calculator.utils.StringUtils;
+
+import net.objecthunter.exp4j.ExpressionBuilder;
+
+import java.text.DecimalFormat;
+
 public class Calculator implements Contract.Model {
     @Override
-    public String verify(String btn, String inputField) {
-        if (inputField.isEmpty()) {
-            switch (btn) {
-                case "-":
-                    return "0-";
-                case ".":
-                    return "0.";
-                case "+":
-                case "*":
-                case "/":
-                    return "";
-                default:
-                    return btn;
+    public String verify(String btn, String expression) {
+        char btnChar = btn.charAt(0);
+
+        if (expression.isEmpty()) {
+            if (Character.isDigit(btnChar)) {
+                return btn;
+            } else {
+                return "0" + btn;
             }
         } else {
-            char lastChar = inputField.charAt(inputField.length() - 1);
-            char btnChar = btn.charAt(0);
+            char lastChar = expression.charAt(expression.length() - 1);
 
             if (!Character.isDigit(lastChar) && !Character.isDigit(btnChar)) {
                 switch (lastChar) {
                     case '.':
                         if (btn.equals(".")) {
-                            return inputField;
+                            return expression;
                         } else {
-                            return inputField.concat("0").concat(btn);
+                            return expression.concat("0").concat(btn);
                         }
                     case '-':
                     case '+':
                     case '*':
                     case '/':
                         if (btn.equals(".")) {
-                            return inputField.concat("0.");
+                            return expression.concat("0.");
                         } else {
-                            inputField = inputField.substring(0, inputField.length() - 1);
-                            return inputField.concat(btn);
+                            expression = expression.substring(0,
+                                    expression.length() - 1);
+                            return expression.concat(btn);
                         }
                 }
             }
 
-            return inputField.concat(btn);
+            return expression.concat(btn);
         }
     }
 
@@ -51,21 +52,57 @@ public class Calculator implements Contract.Model {
     }
 
     @Override
-    public String delete(String inputField) {
-        if (inputField.isEmpty()) {
-            return inputField;
-        } else {
-            return inputField.substring(0, inputField.length() - 1);
+    public String delete(String expression) {
+        if (expression.isEmpty()) {
+            return expression;
+        }
+
+        if (expression.length() == 2) {
+            if (expression.equals("0.")) {
+                return "";
+            }
+        }
+
+        return expression.substring(0, expression.length() - 1);
+    }
+
+    @Override
+    public String modulo(String expression) {
+        if (expression.isEmpty()) {
+            return expression;
+        }
+
+        String lastNumber = getLastNumberFromExpression(expression);
+        String modulo = count(lastNumber + "/100");
+        expression = StringUtils.replaceLast(expression, lastNumber, modulo);
+        return expression;
+    }
+
+    @Override
+    public String count(String expression) {
+        if (expression.isEmpty()) {
+            return expression;
+        }
+
+        char lastChar = expression.charAt(expression.length() - 1);
+
+        if (!Character.isDigit(lastChar)) {
+            expression = expression.substring(0, expression.length() - 1);
+        }
+
+        try {
+            Double result = new ExpressionBuilder(expression).build().evaluate();
+            String formattedResult = new DecimalFormat("#.##########").format(result);
+            formattedResult = formattedResult.replace(",", ".");
+            return formattedResult;
+        } catch (ArithmeticException exception) {
+            return "Can`t divide by zero";
         }
     }
 
-    @Override
-    public String modulo(String inputField) {
-        return null;
-    }
-
-    @Override
-    public String count(String inputField) {
-        return "";
+    private String getLastNumberFromExpression(String expression) {
+        String digitsStr = expression.replaceAll("[^0-9.]", " ");
+        String[] digitsArr = digitsStr.split(" ");
+        return digitsArr[digitsArr.length - 1];
     }
 }
